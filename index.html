@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>龍鳳影書閣｜人機驗證測試</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async defer></script>
+  <style>
+    body {
+      background: #430909;
+      color: #f8d77a;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 35px 12px;
+    }
+    .panel {
+      max-width: 420px;
+      margin: auto;
+      padding: 25px 15px;
+      border: 3px solid #d4a43d;
+      border-radius: 18px;
+      background: #650e13;
+    }
+    h1 { font-size: 25px; }
+    .cf-turnstile {
+      display: flex;
+      justify-content: center;
+      margin: 25px 0;
+    }
+    button {
+      background: #e5b84d;
+      color: #421010;
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    #result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>龍鳳影書閣</h1>
+    <p>Cloudflare Turnstile 人機驗證測試</p>
+
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAAF9UI32bgyXWsHJq"
+         data-callback="verified"></div>
+
+    <button onclick="checkToken()">檢查驗證結果</button>
+    <p id="result">等待人機驗證……</p>
+  </div>
+
+  <script>
+    let token = "";
+
+    function verified(value) {
+      token = value;
+      document.getElementById("result").textContent =
+        "已取得 Turnstile 驗證權杖";
+    }
+
+    function checkToken() {
+      document.getElementById("result").textContent =
+        token
+          ? "前端驗證成功，已取得權杖"
+          : "尚未取得有效驗證權杖";
+    }
+  </script>
+</body>
+</html>
 
